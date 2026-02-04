@@ -11,66 +11,70 @@
       background: radial-gradient(circle at top, #0f3d2e, #02110c);
       color: #eafff5;
     }
-    .container {
-      max-width: 1100px;
-      margin: auto;
-      padding: 24px;
-    }
-    .hero {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      align-items: center;
-    }
+    .container { max-width: 1100px; margin: auto; padding: 24px; }
+    .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center; }
     .card {
       background: linear-gradient(180deg, rgba(20,80,60,0.85), rgba(10,40,30,0.95));
-      border-radius: 18px;
-      padding: 28px;
-      box-shadow: 0 12px 30px rgba(0,0,0,.45);
+      border-radius: 18px; padding: 28px; box-shadow: 0 12px 30px rgba(0,0,0,.45);
     }
     h1 { margin: 0 0 8px 0; font-size: 32px; }
     .subtitle { opacity: .85; margin-bottom: 12px; }
     .desc { line-height: 1.6; opacity: .95; }
-    .btn-row { display: flex; gap: 12px; margin-top: 18px; }
+    .btn-row { display: flex; gap: 12px; margin-top: 18px; flex-wrap: wrap; }
     .btn {
-      flex: 1;
-      text-align: center;
-      padding: 14px 16px;
-      border-radius: 12px;
+      flex: 1; text-align: center; padding: 12px 14px; border-radius: 12px;
       background: linear-gradient(135deg, #1fd8a4, #1fa2d8);
-      color: #002;
-      text-decoration: none;
-      font-weight: bold;
-      transition: transform .12s ease, box-shadow .12s ease;
-      box-shadow: 0 6px 18px rgba(0,0,0,.35);
+      color: #002; text-decoration: none; font-weight: bold; border: none; cursor: pointer;
     }
-    .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,.45); }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 18px;
-    }
-    .stat {
-      background: rgba(0,0,0,.25);
-      border-radius: 12px;
-      padding: 14px;
-      text-align: center;
-    }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 18px; }
+    .stat { background: rgba(0,0,0,.25); border-radius: 12px; padding: 14px; text-align: center; }
     .stat b { font-size: 20px; color: #9fffe0; }
 
-    .section {
-      margin-top: 28px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
+    .section { margin-top: 36px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .full { grid-column: 1 / -1; }
+
+    input, select {
+      width: 100%; padding: 12px; border-radius: 10px; border: none; margin-top: 8px;
     }
 
-    ul { padding-left: 18px; line-height: 1.6; }
+    .member {
+      background: rgba(0,0,0,.25);
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-top: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-    .full {
-      grid-column: 1 / -1;
+    .member button {
+      border: none;
+      border-radius: 8px;
+      padding: 6px 10px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .hidden { display: none; }
+
+    #loginOverlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.6);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+    }
+
+    .top-auth {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 10;
+      display: flex;
+      gap: 8px;
     }
 
     @media (max-width: 800px) {
@@ -79,81 +83,188 @@
   </style>
 </head>
 <body>
-  <div class="container">
 
-    <!-- HERO -->
-    <div class="hero">
-      <div class="card">
-        <h1>The Womanizer</h1>
-        <div class="subtitle">Official Team Page</div>
-        <p class="desc">
-          Base resmi komunitas Womanizer. Tempat buat kenalan, rekrut member baru,
-          dan koordinasi tim lewat Discord & WhatsApp.
-        </p>
+<div class="top-auth">
+  <button id="loginTop" class="btn" onclick="openLogin()">Login</button>
+  <button id="logoutTop" class="btn hidden" onclick="logout()">Logout</button>
+</div>
 
-        <div class="stats">
-          <div class="stat">
-            <b id="totalMember">0</b><br/>Member
-          </div>
-          <div class="stat">
-            <b>Active</b><br/>Community
-          </div>
-          <div class="stat">
-            <b>24/7</b><br/>Support
-          </div>
-        </div>
-      </div>
-
-      <!-- TENGAH CUMA TOMBOL -->
-      <div class="card">
-        <h2>Join Community</h2>
-        <p class="desc">Masuk ke server resmi kami:</p>
-        <div class="btn-row">
-          <a class="btn" href="https://discord.gg/qWZJEjts" target="_blank">Join Discord</a>
-          <a class="btn" href="https://chat.whatsapp.com/BfGMC9s4Xkc4ptAepxRftK?mode=gi_t" target="_blank">Join WhatsApp</a>
-        </div>
+<div class="container">
+  <div class="hero">
+    <div class="card">
+      <h1>The Womanizer</h1>
+      <div class="subtitle">Official Team Page</div>
+      <p class="desc">Komunitas Minecraft Economy.</p>
+      <div class="stats">
+        <div class="stat"><b id="totalMember">0</b><br/>Member</div>
+        <div class="stat"><b>Active</b><br/>Community</div>
+        <div class="stat"><b>24/7</b><br/>Support</div>
       </div>
     </div>
 
-    <!-- SECTION BAWAH -->
-    <div class="section">
-      <div class="card">
-        <h2>About Team</h2>
-        <p class="desc">
-          The Womanizer (Womanizer) adalah team komunitas yang menjunjung
-          sportivitas, solidaritas, dan kenyamanan member. Kami terbuka untuk
-          rekrut member baru selama mengikuti rules yang berlaku.
-        </p>
-      </div>
-
-      <div class="card">
-        <h2>Registrasi</h2>
-        <p class="desc">
-          Daftar resmi melalui form Dyno. Setelah submit, tunggu verifikasi admin
-          di Discord.
-        </p>
-        <div class="btn-row">
-          <a class="btn" href="https://dyno.gg/form/55cb4047" target="_blank">Buka Form Registrasi</a>
-        </div>
-      </div>
-
-      <div class="card full">
-        <h2>Rules</h2>
-        <ul>
-          <li>Ikuti rules game/server (no cheat, exploit, dll).</li>
-          <li>No NSFW, no toxic, no hate speech.</li>
-          <li>No gore, no spam, no scam.</li>
-          <li>No impersonation.</li>
-          <li>Respect hierarchy & system.</li>
-        </ul>
+    <div class="card">
+      <h2>Join Community</h2>
+      <div class="btn-row">
+        <a class="btn" href="#">Join Discord</a>
+        <a class="btn" href="#">Join WhatsApp</a>
       </div>
     </div>
-
   </div>
 
-  <script>
-    const members = JSON.parse(localStorage.getItem("members")) || [];
-    document.getElementById("totalMember").textContent = members.length;
-  </script>
+  <div class="section">
+    <div class="card">
+      <h2>About Team</h2>
+      <p class="desc">
+        Game Minecraft Economy. Fokus kami pada trading antar player, pengelolaan shop,
+        job,dan membuat farm besar yang menghasilkan uang.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Registrasi</h2>
+      <p class="desc">Daftar lewat form resmi, lalu tunggu verifikasi admin.</p>
+      <div class="btn-row">
+        <a class="btn" href="#">Buka Form Registrasi</a>
+      </div>
+    </div>
+
+    <div class="card hidden" id="leaderPanel">
+      <h2>Dashboard Leader</h2>
+      <input id="nama" placeholder="Nama member">
+      <input id="role" placeholder="Role (admin/member)">
+      <input id="passMember" placeholder="Password member">
+      <div class="btn-row">
+        <button class="btn" onclick="tambahMember()">Tambah Member</button>
+      </div>
+    </div>
+
+    <div class="card full">
+      <h2>Member Team</h2>
+      <input id="search" placeholder="Cari member..." oninput="renderMember()">
+      <div id="memberList"></div>
+    </div>
+  </div>
+</div>
+
+<div id="loginOverlay">
+  <div class="card" style="max-width:400px;width:100%">
+    <h2>Login</h2>
+    <select id="loginType">
+      <option value="leader">Leader</option>
+      <option value="member">Member / Admin</option>
+    </select>
+    <input id="loginName" placeholder="Nama (dymidprow)">
+    <input id="loginPass" type="password" placeholder="Password">
+    <div class="btn-row">
+      <button class="btn" onclick="login()">Login</button>
+      <button class="btn" onclick="closeLogin()">Batal</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const PASSWORD_LEADER = "212009"; // ganti kalau mau
+let members = JSON.parse(localStorage.getItem("members") || "[]");
+let isLeader = false;
+let isAdmin = false;
+
+function save() {
+  localStorage.setItem("members", JSON.stringify(members));
+  document.getElementById("totalMember").textContent = members.length;
+}
+
+function openLogin(){ document.getElementById("loginOverlay").style.display="flex"; }
+function closeLogin(){ document.getElementById("loginOverlay").style.display="none"; }
+
+function login() {
+  const type = loginType.value;
+  const name = loginName.value.trim();
+  const pass = loginPass.value.trim();
+
+  if (type === "leader") {
+    if (pass === PASSWORD_LEADER) {
+      isLeader = true;
+      isAdmin = false;
+      leaderPanel.classList.remove("hidden");
+      loginTop.classList.add("hidden");
+      logoutTop.classList.remove("hidden");
+      closeLogin();
+      renderMember();
+      alert("Login leader berhasil");
+    } else alert("Password leader salah");
+  } else {
+    const m = members.find(m => m.nama === name && m.pass === pass);
+    if (!m) return alert("Nama / password salah");
+
+    isLeader = false;
+    isAdmin = (m.role === "admin");
+
+    leaderPanel.classList.add("hidden");
+    loginTop.classList.add("hidden");
+    logoutTop.classList.remove("hidden");
+    closeLogin();
+    renderMember();
+    alert(m.role === "admin" ? "Login admin berhasil" : "Login member berhasil");
+  }
+}
+
+function logout() {
+  isLeader = false;
+  isAdmin = false;
+  leaderPanel.classList.add("hidden");
+  loginTop.classList.remove("hidden");
+  logoutTop.classList.add("hidden");
+  renderMember();
+}
+
+function tambahMember() {
+  if (!isLeader) return alert("Hanya leader yang bisa menambah member");
+  if (!nama.value || !role.value || !passMember.value) return alert("Lengkapi data dulu");
+
+  members.push({ nama: nama.value, role: role.value, pass: passMember.value });
+  save(); renderMember();
+  nama.value = role.value = passMember.value = "";
+}
+
+function hapusMember(i) {
+  if (!isLeader && !isAdmin) return alert("Tidak punya akses");
+  members.splice(i, 1);
+  save(); renderMember();
+}
+
+function editMember(i) {
+  if (!isLeader && !isAdmin) return alert("Tidak punya akses");
+  const newRole = prompt("Role baru (admin/member):", members[i].role);
+  const newPass = prompt("Password baru (kosongkan jika tidak diubah):", "");
+
+  if (newRole) members[i].role = newRole;
+  if (newPass) members[i].pass = newPass;
+
+  save(); renderMember();
+}
+
+function renderMember() {
+  const q = document.getElementById("search").value.toLowerCase();
+  memberList.innerHTML = "";
+
+  members
+    .filter(m => m.nama.toLowerCase().includes(q))
+    .forEach((m, i) => {
+      memberList.innerHTML += `
+        <div class="member">
+          <span>${m.nama} — ${m.role}</span>
+          ${(isLeader || isAdmin) ? `
+            <div style="display:flex;gap:6px">
+              <button onclick="editMember(${i})" style="background:#3b82f6">Edit</button>
+              <button onclick="hapusMember(${i})" style="background:#ef4444">Hapus</button>
+            </div>
+          ` : ""}
+        </div>`;
+    });
+}
+
+save(); 
+renderMember();
+</script>
 </body>
 </html>
