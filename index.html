@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Womanizer – Official Team Page</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: radial-gradient(circle at top, #0f3d2e, #02110c);
+      color: #eafff5;
+    }
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 24px;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: center;
+    }
+    .card {
+      background: linear-gradient(180deg, rgba(20,80,60,0.85), rgba(10,40,30,0.95));
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: 0 12px 30px rgba(0,0,0,.45);
+    }
+    h1 { margin: 0 0 8px 0; font-size: 32px; }
+    .subtitle { opacity: .85; margin-bottom: 12px; }
+    .desc { line-height: 1.6; opacity: .95; }
+    .btn-row { display: flex; gap: 12px; margin-top: 18px; }
+    .btn {
+      flex: 1;
+      text-align: center;
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #1fd8a4, #1fa2d8);
+      color: #002;
+      text-decoration: none;
+      font-weight: bold;
+      transition: transform .12s ease, box-shadow .12s ease;
+      box-shadow: 0 6px 18px rgba(0,0,0,.35);
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,.45); }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .stat {
+      background: rgba(0,0,0,.25);
+      border-radius: 12px;
+      padding: 14px;
+      text-align: center;
+    }
+    .stat b { font-size: 20px; color: #9fffe0; }
+
+    .section {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    ul { padding-left: 18px; line-height: 1.6; }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    @media (max-width: 800px) {
+      .hero, .section { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="card">
+        <h1>The Womanizer</h1>
+        <div class="subtitle">Official Team Page</div>
+        <p class="desc">
+          Base resmi komunitas Womanizer. Tempat buat kenalan, rekrut member baru,
+          dan koordinasi tim lewat Discord & WhatsApp.
+        </p>
+
+        <div class="stats">
+          <div class="stat">
+            <b id="totalMember">0</b><br/>Member
+          </div>
+          <div class="stat">
+            <b>Active</b><br/>Community
+          </div>
+          <div class="stat">
+            <b>24/7</b><br/>Support
+          </div>
+        </div>
+      </div>
+
+      <!-- TENGAH CUMA TOMBOL -->
+      <div class="card">
+        <h2>Join Community</h2>
+        <p class="desc">Masuk ke server resmi kami:</p>
+        <div class="btn-row">
+          <a class="btn" href="https://discord.gg/qWZJEjts" target="_blank">Join Discord</a>
+          <a class="btn" href="https://chat.whatsapp.com/BfGMC9s4Xkc4ptAepxRftK?mode=gi_t" target="_blank">Join WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION BAWAH -->
+    <div class="section">
+      <div class="card">
+        <h2>About Team</h2>
+        <p class="desc">
+          The Womanizer (Womanizer) adalah team komunitas yang menjunjung
+          sportivitas, solidaritas, dan kenyamanan member. Kami terbuka untuk
+          rekrut member baru selama mengikuti rules yang berlaku.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>Registrasi</h2>
+        <p class="desc">
+          Daftar resmi melalui form Dyno. Setelah submit, tunggu verifikasi admin
+          di Discord.
+        </p>
+        <div class="btn-row">
+          <a class="btn" href="https://dyno.gg/form/55cb4047" target="_blank">Buka Form Registrasi</a>
+        </div>
+      </div>
+
+      <div class="card full">
+        <h2>Rules</h2>
+        <ul>
+          <li>Ikuti rules game/server (no cheat, exploit, dll).</li>
+          <li>No NSFW, no toxic, no hate speech.</li>
+          <li>No gore, no spam, no scam.</li>
+          <li>No impersonation.</li>
+          <li>Respect hierarchy & system.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const members = JSON.parse(localStorage.getItem("members")) || [];
+    document.getElementById("totalMember").textContent = members.length;
+  </script>
+</body>
+</html>
